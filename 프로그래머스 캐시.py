@@ -1,9 +1,10 @@
 def solution(cacheSize, cities):
     answer = 0
+    #캐시가 0일경우 바로 반환된다.
     if cacheSize == 0:
         return len(cities * 5)
     lst = [0] * cacheSize
-    
+    #대소문자 구별을 인지하지 못한상태로 코딩하였다.
     for city in cities:
         flag = False
         for i in range(cacheSize):
