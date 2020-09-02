@@ -10,10 +10,10 @@ def solution(board):
                 flag = True
                 num = 0
                 minN = min(nx - x - 1, ny - y - 1)
-                for i in range(minN, -1, -1):
+                for i in range(1, minN + 1):
                     num = i + 1
-                    for j in range(minN):
-                        print(x, y, i, board[x + j][y : y + i + 1])
+                    for j in range(0, minN + 1):
+                        # print(x, y, i, board[x + j][y : y + i + 1])
                         if 0 in board[x + j][y : y + i + 1]: 
 
                             flag = False
