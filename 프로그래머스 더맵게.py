@@ -19,30 +19,46 @@
 
 import heapq
 
-def solution(scoville, K):
+# def solution(scoville, K):
 
-    heap = scoville
-    heapq.heapify(heap)
-    answer = 0
-    sum = 0
+#     heap = scoville
+#     heapq.heapify(heap)
+#     answer = 0
+#     sum = 0
 
-    if heap[0] >= K:
-        return 0
+#     if heap[0] >= K:
+#         return 0
 
-    while len(heap) > 1:
-        sum = 0
-        sum += heapq.heappop(heap)
-        sum += heapq.heappop(heap) * 2
-        if sum >= K:
-            answer += 1
-            return answer
-        heapq.heappush(heap, sum)
-        answer += 1
+#     while len(heap) > 1:
+#         sum = 0
+#         sum += heapq.heappop(heap)
+#         sum += heapq.heappop(heap) * 2
+#         if sum >= K:
+#             answer += 1
+#             return answer
+#         heapq.heappush(heap, sum)
+#         answer += 1
 
-    if len(heap) <= 1:
-        return -1
+#     if len(heap) <= 1:
+#         return -1
 
 
-    return answer
+#     return answer
 
+import heapq
+
+
+def solution(hot, k):
+
+    heapq.heapify(hot) 
+    cnt = 0 
+    while hot:
+        if hot[0] >= k:
+            return cnt
+        if len(hot) == 1 and hot[0]<k:
+            return -1
+        heapq.heappush(hot, heapq.heappop(hot) + heapq.heappop(hot) * 2)
+
+        cnt += 1
+    return cnt
 print(solution([1, 1, 100], 5))
