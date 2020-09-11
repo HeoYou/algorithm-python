@@ -46,15 +46,17 @@
 #     process()
 import sys
 sys.setrecursionlimit(100000)
+
 def dfs(x, y):
-    global ckField, field
+    global ckField, field, dx, dy
     ckField[x][y] = 1
 
     for i in range(4):
         xx, yy = dx[i] + x, dy[i] + y
-        if xx >= 0 and xx < n and yy >= 0 and yy < m:
-            if field[xx][yy] == 1 and ckField[xx][yy] == 0:
-                dfs(xx, yy)
+        if xx < 0 or xx >= n or yy < 0 or yy >= m:
+            continue
+        if field[xx][yy] == 1 and ckField[xx][yy] == 0:
+            dfs(xx, yy)
                 
 
 
@@ -69,9 +71,9 @@ for _ in range(tc):
     field = [[0] * m for i in range(n)]
     ckField = [[0] * m for i in range(n)]
 
-    for i in range(k):
+    for _ in range(k):
         x, y = map(int, input().split())
-        field[y + 1][x + 1] = 1
+        field[y][x] = 1
 
     for i in range(n):
         for j in range(m):
