@@ -45,27 +45,26 @@ from collections import deque
 import sys
 
 
-def dfs():
-    stack = [v]
+def dfs(lst, n):
+    stack = [n]
     visit = []
 
     while stack:
         node = stack.pop()
         if node not in visit:
             visit.append(node)
-            stack.extend(sorted(graph[node],reverse = True))
+            stack.extend(sorted(lst[node],reverse = True))
     return visit
 
-def bfs():
-    global graph, v
-    stack = [v]
+def bfs(lst, n):
+    stack = deque([n])
     visit = []
 
     while stack:
-        node = stack.pop(0)
+        node = stack.popleft()
         if node not in visit:
            visit.append(node)
-           stack.extend(sorted(graph[node]))
+           stack.extend(sorted(lst[node]))
     return visit
 
 
@@ -79,8 +78,8 @@ for i in range(m):
     graph[a].append(b)
     graph[b].append(a)
 
-dfsAnswer = dfs()
-bfsAnswer = bfs()
+dfsAnswer = dfs(graph, v)
+bfsAnswer = bfs(graph, v)
 print(' '.join(map(str, dfsAnswer)))
 print(' '.join(map(str, bfsAnswer)))
 
