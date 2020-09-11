@@ -1,18 +1,20 @@
 import sys
+from collections import deque
+
 n, m = map(int, input().split())
 answer = []
 graph = [[] for i in range(n + 1)]
 maxCount = 0
 
 def dfs(v):
-    stack = [v]
+    q = deque([v])
     visit = []
 
-    while stack:
-        node = stack.pop()
+    while q:
+        node = q.popleft()
         if node not in visit:
             visit.append(node)
-            stack.extend(graph[node]) 
+            q.extend(graph[node]) 
     return len(visit)
 
 for i in range(m):
