@@ -6,15 +6,30 @@ answer = []
 graph = [[] for i in range(n + 1)]
 maxCount = 0
 
+# def dfs(v):
+#     q = deque([v])
+#     visit = [False] * (n + 1)
+#     visit[v] = True
+#     count = 1
+#     while q:
+#         node = q.popleft()
+#         for i in graph[node]:
+#             if not visit[i]:
+#                 q.append(i)
+#                 visit[i] = True
+#                 count += 1
+#     return count
+
 def dfs(v):
     q = deque([v])
     visit = []
-
+    count = 1
     while q:
         node = q.popleft()
         if node not in visit:
+            q.extend(graph[node])
             visit.append(node)
-            q.extend(graph[node]) 
+            
     return len(visit)
 
 for i in range(m):
