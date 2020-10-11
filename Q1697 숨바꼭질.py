@@ -10,7 +10,7 @@ def bfs():
         now_pos = queue.popleft()
         if now_pos == k:
             return arr[now_pos]
-        for next_pos in (now_pos - 1, now_pos + 1, now_pos * 2):
+        for next_pos in [now_pos - 1, now_pos + 1, now_pos * 2]:
             if 0 <= next_pos < MAX and not arr[next_pos]:
                 arr[next_pos] = arr[now_pos] + 1
                 queue.append(next_pos)

@@ -14,12 +14,11 @@ for i in range(n):
                 dp[i + 1][j + arr[i]] = True
             if j - arr[i] >= 0:
                 dp[i + 1][j - arr[i]] = True
-
+answer = -1
 for i in range(m, -1, -1):
     if dp[-1][i] == True:
-        print(i)
+        answer = i
         break
 
-if True not in dp[-1]:
-    print(-1)
+print(answer)
             
