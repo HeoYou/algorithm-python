@@ -15,3 +15,10 @@ for i in range(3, n):
     dp[i] = max(l[i] + l[i - 1] + dp[i - 3], l[i] + dp[i - 2])
 
 print(max(dp[-2:]))
+
+n = int(input())
+
+l,dp = [0] * (n + 2), [0] * (n + 2)
+
+for i in range(n):
+    l[i + 2] = int(input())
