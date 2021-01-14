@@ -17,8 +17,8 @@ def BS(n):
             return 1
     return 0
 
-answer = []
-for i in lst2:
-    answer.append(BS(i))
+answer = [0] * M
+for i in range(M):
+    answer[i] = BS(lst2[i])
 
 print(' '.join(map(str, answer)))
