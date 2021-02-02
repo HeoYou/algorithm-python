@@ -1,7 +1,7 @@
 import copy
 M, N = map(int, input().split())
 data = []
-answer = 0
+answer = -1
 dx, dy = [1, 0, -1, 0], [0, 1, 0, -1]
 
 for i in range(N):
@@ -15,10 +15,9 @@ def tomato(x, y):
     for i in range(4):
         xx, yy = x + dx[i], y + dy[i]
 
-        if xx < 0 or xx >= N or yy < 0 or yy >= M:
+        if xx < 0 or xx >= N or yy < 0 or yy >= M or data[xx][yy] == -1:
             continue
         if tmpData[xx][yy] == 0:
-            print(123, x, y)
             data[xx][yy] = 1
 
 
@@ -28,11 +27,9 @@ while True:
     answer += 1
     for i in range(N):
         for j in range(M):
-            if data[i][j] == 1:
-                print(i, j)
+            if tmpData[i][j] == 1:
                 tomato(i, j)
     
-    print(*data, sep='\n')
 
     if data[:] == tmpData[:]:
         for i in data:
@@ -44,9 +41,3 @@ while True:
                 exit()
 
     tmpData = copy.deepcopy(data)
-
-
-            
-
-
-print(data)
