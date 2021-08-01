@@ -1,30 +1,13 @@
 def solution(s, n):
-    answer = []
+    s = list(s)
+    for i in range(len(s)):
+        if 'A' <= s[i] <= 'Z':
+            print(ord(s[i]) + n)
+            print(((ord(s[i]) + n) % ord('Z')))
+            s[i] = chr((ord(s[i]) + n) % ord('Z') + ord('A') - 1) if (ord(s[i]) + n) >= ord('Z') else chr(ord(s[i]) + n)
+        elif 'a' <= s[i] <= 'z':
+            s[i] = chr((ord(s[i]) + n) % ord('z') + ord('a') - 1) if (ord(s[i]) + n) >= ord('z') else chr(ord(s[i]) + n)
+    print(s)
+    return ''.join(s)
 
-    for i in s:
-        if i != ' ':
-            if ord(i) > 95:
-                print(1, ord(i) + n)
-                if ord(i) + n > 122:
-                    print(((ord(i) + n) % 122 + 97))
-                
-                    answer.append(chr((ord(i) + n) % 122 + 97))
-                else:
-                    answer.append(chr((ord(i) + n) % 122))
-                
-            elif ord(i) < 96:
-                # print(chr((ord(i) + n) % 90 + 65))
-                if ord(i) + n > 90:
-                    answer.append(chr((ord(i) + n) % 90 + 65))
-                else:
-                    answer.append(chr((ord(i) + n) % 90))
-            
-        else:
-            answer.append(" ")
-            
-    return ''.join(answer)
-
-    
-
-print(ord('a'), ord('z'), ord("A"), ord("Z"))
-print(solution("AaZz", 25))
+print(solution("a Z z", 1))
