@@ -1,4 +1,30 @@
+import pprint
 def solution(n, k, cmd):
+    dic = {i : [i - 1, i + 1, 'O'] for i in range(1, n + 2)}
+    pos = k
+    undo = []
+
+    for c in cmd:
+        if c == 'C':
+            undo.append()
+            dic[pos][2] = 'X'
+            dic[dic[pos][0]][1] = dic[pos][1]
+            dic[dic[pos][1]][0] = dic[pos][0]
+            if dic[pos][1] > n:
+                pos = dic[pos][0]
+            else:
+                pos = dic[pos][1]
+
+        pprint.pprint(dic)
+    answer = ''
+    return answer
+
+print(solution(8, 7, ["C", "C", "C"]))
+
+
+
+
+def solution1(n, k, cmd):
     lst = ['O' for i in range(n)]
     pos = k
     stack = []
