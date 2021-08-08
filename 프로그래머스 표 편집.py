@@ -1,25 +1,47 @@
 import pprint
 def solution(n, k, cmd):
-    dic = {i : [i - 1, i + 1, 'O'] for i in range(1, n + 2)}
+    dic = {i : [i - 1, i + 1, 'O'] for i in range(-1, n + 1)}
     pos = k
     undo = []
 
     for c in cmd:
         if c == 'C':
-            undo.append()
+            undo.append([pos, dic[pos][0], dic[pos][1]])
             dic[pos][2] = 'X'
             dic[dic[pos][0]][1] = dic[pos][1]
             dic[dic[pos][1]][0] = dic[pos][0]
-            if dic[pos][1] > n:
+            if dic[pos][1] >= n:
                 pos = dic[pos][0]
             else:
                 pos = dic[pos][1]
+            
+        elif c == 'Z':
+            num, pre, next = undo.pop()
+            dic[num][2] = 'O'
+            dic[pre][1] = num
+            dic[next][0] = num
 
+        else:
+            vec, move = c.split(' ')
+            move = int(move)
+
+            if vec == 'D':
+                for i in range(move):
+                    pos = dic[pos][1]
+            elif vec == 'U':
+                for i in range(move):
+                    pos = dic[pos][0]
+        print(c, pos)
         pprint.pprint(dic)
-    answer = ''
-    return answer
 
-print(solution(8, 7, ["C", "C", "C"]))
+    
+    answer = ''
+
+    for i in dic.keys():
+        answer += dic[i][2] 
+    return answer[1:-1]
+
+print(solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]))
 
 
 
