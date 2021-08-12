@@ -1,24 +1,30 @@
-N = int(input())
-lst = sorted(list(map(int, input().split())))
+_, dic = input(), {i: 1 for i in map(int, input().split(' '))}
+input()
+for i in list(map(int, input().split(' '))):
+    print(dic.get(i, 0), end=' ')
 
-M = int(input())
-lst2 = list(map(int, input().split()))
 
-def BS(n):
-    left, mid, right = 0, N // 2, N - 1
+# N = int(input())
+# lst = sorted(list(map(int, input().split())))
 
-    while left <= right:
-        mid = (left + right) // 2
-        if lst[mid] > n:
-            right = mid - 1
-        elif lst[mid] < n:
-            left = mid + 1
-        else:
-            return 1
-    return 0
+# M = int(input())
+# lst2 = list(map(int, input().split()))
 
-answer = [0] * M
-for i in range(M):
-    answer[i] = BS(lst2[i])
+# def BS(n):
+#     left, mid, right = 0, N // 2, N - 1
 
-print(' '.join(map(str, answer)))
+#     while left <= right:
+#         mid = (left + right) // 2
+#         if lst[mid] > n:
+#             right = mid - 1
+#         elif lst[mid] < n:
+#             left = mid + 1
+#         else:
+#             return 1
+#     return 0
+
+# answer = [0] * M
+# for i in range(M):
+#     answer[i] = BS(lst2[i])
+
+# print(' '.join(map(str, answer)))
