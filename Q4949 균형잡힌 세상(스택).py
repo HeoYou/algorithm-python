@@ -17,12 +17,18 @@ while True:
                 if stack.pop() == '[':
                     print('no')
                     break
+            else:
+                print('no')
+                break
 
         elif s == ']':
             if len(stack):
                 if stack.pop() == '(':
                     print('no')
                     break
+            else:
+                print('no')
+                break
         print(stack)
     if len(stack):
         print('no')
