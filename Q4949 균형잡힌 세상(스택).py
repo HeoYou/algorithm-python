@@ -1,3 +1,4 @@
+import sys
 cmd = ''
 answer = []
 while True:
@@ -5,37 +6,28 @@ while True:
     if cmd == '.':
         break
     stack = []
+    flag = True
 
     for s in cmd:
 
-        if s == '(':
-            stack.append('(')
-        elif s == '[':
-            stack.append('[')
+        if s == '(' or s == '[':
+            stack.append(s)
         elif s == ')':
-            if len(stack):
-                if stack.pop() == '[':
-                    print('no')
-                    break
-            else:
-                print('no')
+            if not stack or stack[-1] == '[':
+                flag = False
                 break
-
+            elif stack[-1] == '(':
+                stack.pop()
         elif s == ']':
-            if len(stack):
-                if stack.pop() == '(':
-                    print('no')
-                    break
-            else:
-                print('no')
+            if not stack or stack[-1] == '(':
+                flag = False
                 break
-        print(stack)
-    if len(stack):
-        print('no')
-        answer.append('no')
-    else:
-        print('yes')
-        answer.append('yes')
+            elif stack[-1] == '[':
+                stack.pop()
 
-print(answer)
+    if flag == True and not stack:
+        print('yes')
+    else:
+        print('no')
+            
 
