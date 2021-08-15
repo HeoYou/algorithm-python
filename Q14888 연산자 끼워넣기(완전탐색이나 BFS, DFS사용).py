@@ -14,18 +14,14 @@ def dfs(calc, count, a, s, m, d):
         max_v = max(calc, max_v)
     
     if a:
-        print('a')
         dfs(calc + lst[count], count + 1, a - 1, s, m, d)
     if s:
-        print('s')
         dfs(calc - lst[count], count + 1, a, s - 1, m, d)
     if m:
-        print('m')
         dfs(calc * lst[count], count + 1, a, s, m - 1, d)
     if d:
-        print('d')
         dfs(-(-calc //lst[count]) if calc < 0 else calc // lst[count], count + 1, a, s, m, d - 1) 
 
-
 dfs(lst[0], 1, op[0], op[1], op[2], op[3])
-print(min_v, max_v)
+print(max_v)
+print(min_v)
