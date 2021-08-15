@@ -23,22 +23,25 @@
 
 n, m = map(int, input().split(' '))
 lst = []
-ansW, ansB = 100000, 100000
+answer = []
 for i in range(n):
     lst.append(input())
 wb, bw = 'WB', 'BW'
 for i in range(n - 7):
     for j in range(m - 7):
         w, b = 0, 0
-        for x in range(8):
-            for y in range(8):
-                if lst[i + x][j + y] != wb[(i + j + x + y) % 2]:
-                    w += 1
-                if lst[i + x][j + y] != bw[(i + j + x + y) % 2] :
-                    b += 1
-    ansW, ansB = min(ansW, w), min(ansB, b)  
+        for x in range(i, i + 8):
+            for y in range(j, j + 8):
+                if (x + y) % 2 == 0:
+                    if lst[x][y] != 'W': w += 1  
+                    if lst[x][y] != 'B': b += 1
+                else:
+                    if lst[x][y] != 'B': w += 1  
+                    if lst[x][y] != 'W': b += 1
+    answer.append(w)  
+    answer.append(b)
 
-print(min(ansW, ansB))
+print(min(answer))
 
 
 
