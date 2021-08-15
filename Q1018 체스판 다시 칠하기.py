@@ -21,9 +21,24 @@
 
 # print(min(minCountB, minCountW))
 
+n, m = map(int, input().split(' '))
+lst = []
+ansW, ansB = 100000, 100000
+for i in range(n):
+    lst.append(input())
+wb, bw = 'WB', 'BW'
+for i in range(n - 7):
+    for j in range(m - 7):
+        w, b = 0, 0
+        for x in range(8):
+            for y in range(8):
+                if lst[i + x][j + y] != wb[(i + j + x + y) % 2]:
+                    w += 1
+                if lst[i + x][j + y] != bw[(i + j + x + y) % 2] :
+                    b += 1
+    ansW, ansB = min(ansW, w), min(ansB, b)  
 
-
-import sys
+print(min(ansW, ansB))
 
 
 
