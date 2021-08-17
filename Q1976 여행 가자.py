@@ -40,6 +40,7 @@ n, m = int(input()), int(input())
 graph = [[] for i in range(n + 1)]
 visit = [0] * (n + 1)
 
+# 그래프 만드는거
 for i in range(n):
     tmp = list(map(int, input().split()))
     for j in range(len(tmp)):
@@ -48,22 +49,30 @@ for i in range(n):
 
 lst = list(map(int, input().split()))
 
+# 첫번째 노드 넣어준다.
 stack = [lst[0]]
 
+# DFS
 while stack:
 
     node = stack.pop()
+    # 방문하면 1로 바꾸어준다.
     visit[node] = 1
 
     for i in graph[node]:
         if visit[i] == 0:
             stack.append(i)
 
+# 방문할 수 있는가 확인
+flag = 1
 for i in lst:
     if visit[i] == 0:
         print('NO')
+        flag = 0
         break
-print('YES')
+if flag:
+    print('YES')
+    
 
 
 
