@@ -2,18 +2,32 @@
 # 시간 초과로 틀렸다. 아
 # 입력속도다 .아 유레카
 
+# import sys
+# input = sys.stdin.readline
+# n, m = map(int, input().split())
+# id, names = dict(), dict()
+
+# for i in range(1, n + 1):
+#     po = input().strip()
+#     id[i] = po
+#     names[po] = i
+# for i in range(m):
+#     po = input().strip()
+#     if po.isdigit():
+#         print(id[int(po)])
+#     else:
+#         print(names[po])
+
+
 import sys
 input = sys.stdin.readline
 n, m = map(int, input().split())
-id, names = dict(), dict()
+id = dict()
 
 for i in range(1, n + 1):
     po = input().strip()
-    id[i] = po
-    names[po] = i
+    id[str(i)] = po
+    id[po] = i
 for i in range(m):
     po = input().strip()
-    if po.isdigit():
-        print(id[int(po)])
-    else:
-        print(names[po])
+    print(id[po])
