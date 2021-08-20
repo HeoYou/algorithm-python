@@ -22,6 +22,11 @@ for i in range(1, n + 1):
     while queue:
 
         v, node = heapq.heappop(queue)
+        # ---------------------------
+        # 이거 두 줄 차이로 3분의 1 줄어듬 속도.
+        if d[i][node] < v:
+            continue
+        # ----------------------------
         for nn, nv in graph[node]:
             nv = nv + v
             if nv < d[i][nn]  and nn != i:
