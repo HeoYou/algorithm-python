@@ -13,6 +13,7 @@ for i in range(n):
         stack = [i]
         count = 0
         while stack:
+            print(stack)
             n = stack.pop()
             visit[n] = 1
             count += 1
