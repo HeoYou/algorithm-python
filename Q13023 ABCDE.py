@@ -26,6 +26,10 @@
     
 # print(0)
 
+import sys
+
+input = sys.stdin.readline
+
 n, m = map(int, input().split())
 
 node = [[] for i in range(n)]
@@ -38,16 +42,19 @@ for i in range(m):
 def dfs(d, num):
     global visit
     visit[num] = 1
-    if d == 5:
+    if d == 4:
         print(1)
         exit()
     
     for i in node[num]:
         if visit[i] == 0:
+            visit[i] = True
             dfs(d + 1, i)
+            visit[i] = False
 
 for i in range(n):
-    visit = [0] * n
-    dfs(1, i)
+    visit[i] = True
+    dfs(0, i)
+    visit[i] = False
 print(0)
 
