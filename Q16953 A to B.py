@@ -1,6 +1,9 @@
 a, b = map(int, input().split())
 answer = 1
-while b > a:
+while a < b:
+    if b % 10 != 1 and b % 2 != 0:
+        answer = -1
+        break
     if b % 10 == 1:
         b //= 10
     elif b % 2 == 0:
