@@ -18,7 +18,7 @@ def dfs(sx, sy, h):
                 if lst[nx][ny] > h and visit[nx][ny] == 0:
                     stack.append([nx, ny])
 
-for hieght in range(1, 101):
+for hieght in range(100):
     count = 0
     visit = [[0] * n for _ in range(n)]
 
