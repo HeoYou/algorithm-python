@@ -32,4 +32,4 @@ for hieght in range(100):
 
 print(answer)
 
-
+  
