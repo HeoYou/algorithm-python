@@ -1,3 +1,3 @@
-# algorism-python
+# algorim-python
 
 asdf
