@@ -46,24 +46,49 @@
     
 # print(answer)
 
-import heapq
+# import heapq
+# import sys
+
+# n, k = map(int, sys.stdin.readline().split(' '))
+# jLst, bLst, tmp = [], [0] * k, []
+# answer = 0
+# for i in range(n):
+#     heapq.heappush(jLst, list(map(int, sys.stdin.readline().split(' '))))
+# for i in range(k):
+#     bLst[i] = int(sys.stdin.readline())
+
+# bLst.sort()
+
+# for i in bLst:
+#     while jLst and i >= jLst[0][0]:
+#         heapq.heappush(tmp, -heapq.heappop(jLst)[1])
+#     if tmp:
+#         answer += -heapq.heappop(tmp)
+#     elif not jLst:
+#         break
+# print(answer)
+
+
 import sys
-
-n, k = map(int, sys.stdin.readline().split(' '))
-jLst, bLst, tmp = [], [0] * k, []
+from heapq import heappop, heappush
+N, K = map(int, input().split())
+input = sys.stdin.readline
 answer = 0
-for i in range(n):
-    heapq.heappush(jLst, list(map(int, sys.stdin.readline().split(' '))))
-for i in range(k):
-    bLst[i] = int(sys.stdin.readline())
+jewelLst, bagLst= [0] * N, [0] * K
+for i in range(N):
+    jewelLst[i] = list(map(int, sys.stdin.readline().split()))
+jewelLst = sorted(jewelLst, reverse = True)
 
-bLst.sort()
+for i in range(K):
+    bagLst[i] = int(sys.stdin.readline())
+bagLst = sorted(bagLst)
 
-for i in bLst:
-    while jLst and i >= jLst[0][0]:
-        heapq.heappush(tmp, -heapq.heappop(jLst)[1])
-    if tmp:
-        answer += -heapq.heappop(tmp)
-    elif not jLst:
-        break
+q = []
+
+for bag in bagLst:
+    while jewelLst and bag >= jewelLst[-1][0]:
+        heappush(q, -jewelLst.pop()[1])
+    if q:
+        answer -= heappop(q)
+
 print(answer)
