@@ -26,18 +26,33 @@
 # print(''.join(stack) if stack else 'FRULA')
 
 # 그냥 리스트를 복사하는게 문제였따. del 을쓰자
-s = list(input())
-comp = list(input())
+# s = list(input())
+# comp = list(input())
+
+# stack = []
+# last_comp = comp[-1]
+# len_comp = len(comp)
+
+# for i in s:
+#     stack.append(i)
+#     if last_comp == stack[-1]:
+#         if stack[-len_comp:] == comp[:]:
+#             del stack[-len_comp:]
+
+
+# print(''.join(stack) if stack else 'FRULA')
+
+S = input()
+delete = list(input())
 
 stack = []
-last_comp = comp[-1]
-len_comp = len(comp)
+last_d = delete[-1]
+len_d = len(delete)
 
-for i in s:
+for i in S:
     stack.append(i)
-    if last_comp == stack[-1]:
-        if stack[-len_comp:] == comp[:]:
-            del stack[-len_comp:]
-
-
-print(''.join(stack) if stack else 'FRULA')
+    if i == last_d:
+        # print(stack[-len_d:], list(delete))
+        if delete == stack[-len_d:]:
+            del stack[-len_d:]
+print(''.join(stack) if stack else "FRULA")
