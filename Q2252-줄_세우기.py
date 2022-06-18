@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
@@ -13,7 +15,7 @@ for i in range(m):
     indegree[b] += 1
     graph[a].append(b)
 
-for i in range(1, n):
+for i in range(1, n + 1):
     if indegree[i] == 0:
         q.append(i)
     
@@ -25,5 +27,4 @@ while q:
         if indegree[i] == 0:
             q.append(i)
         
-print(result, q, graph, indegree)
-
+print(*result)
