@@ -1,72 +1,91 @@
 from copy import deepcopy
 
-N = int(input())
+n = int(input())
 
-Board = [list(map(int, input().split())) for i in range(N)]
+graph = []
+for i in range(n):
+    graph.append(list(map(int, input().split())))
 
-def rotate90(B, N):
-    NB = deepcopy(B)
-    for i in range(N):
-        for j in range(N):
-            NB[j][N-i-1] = B[i][j]
-    return NB
+def move(board, dir):
+    if dir == 0:  # 동쪽
+        for i in range(n):
+            top = n - 1
+            for j in range(n - 2, -1, -1):
+                if board[i][j]:
+                    tmp = board[i][j]
+                    board[i][j] = 0
+                    if board[i][top] == 0:
+                        board[i][top] = tmp
+                    elif board[i][top] == tmp:
+                        board[i][top] = tmp * 2
+                        top -= 1
+                    else:
+                        top -= 1
+                        board[i][top] = tmp
 
-def convert(lst, N):
-    new_list = [i for i in lst if i]
-    for i in range(1, len(new_list)):
-        if new_list[i-1] == new_list[i]:
-            new_list[i-1]  *= 2
-            new_list[i] = 0
-    new_list = [i for i in new_list if i]
-    return new_list + [0] * (N-len(new_list))
+    elif dir == 1:  # 서쪽
+        for i in range(n):
+            top = 0
+            for j in range(1, n):
+                if board[i][j]:
+                    tmp = board[i][j]
+                    board[i][j] = 0
+                    if board[i][top] == 0:
+                        board[i][top] = tmp
+                    elif board[i][top] == tmp:
+                        board[i][top] = tmp * 2
+                        top += 1
+                    else:
+                        top += 1
+                        board[i][top] = tmp
+
+    elif dir == 2:  # 남쪽
+        for j in range(n):
+            top = n - 1
+            for i in range(n - 2, -1, -1):
+                if board[i][j]:
+                    tmp = board[i][j]
+                    board[i][j] = 0
+                    if board[top][j] == 0:
+                        board[top][j] = tmp
+                    elif board[top][j] == tmp:
+                        board[top][j] = tmp * 2
+                        top -= 1
+                    else:
+                        top -= 1
+                        board[top][j] = tmp
+
+    else:
+        for j in range(n):
+            top = 0
+            for i in range(1, n):
+                if board[i][j]:
+                    tmp = board[i][j]
+                    board[i][j] = 0
+                    if board[top][j] == 0:
+                        board[top][j] = tmp
+                    elif board[top][j] == tmp:
+                        board[top][j] = tmp * 2
+                        top += 1
+                    else:
+                        top += 1
+                        board[top][j] = tmp
+
+    return board
 
 
-def dfs(N, B, count):
+def dfs(board, cnt):
+    global ans
+    if cnt == 5:
+        for i in range(n):
+            for j in range(n):
+                ans = max(ans, board[i][j])
+        return
 
-    ret = max([max(i) for i in B])
-    if count == 0:
-        return ret
-    
-    for _ in range(4):
-        X = [convert(i, N) for i in B]
-        if X != B:
-            ret = max(ret, dfs(N, X, count - 1))
-        B = rotate90(B, N)
+    for i in range(4):
+        tmp_board = move(deepcopy(board), i)
+        dfs(tmp_board, cnt + 1)
 
-print(dfs(N, Board, 5))
-
-# from copy import deepcopy
-
-
-# def rotate90(B, N):
-#     NB = deepcopy(B)
-#     for i in range(N):
-#         for j in range(N):
-#             NB[j][N - i - 1] = B[i][j]
-#     return NB
-
-# def convert(lst, N):
-#     new_list = [i for i in lst if i]
-#     for i in range(1, len(new_list)):
-#         if new_list[i - 1] == new_list[i]:
-#             new_list[i-1] *= 2
-#             new_list[i] = 0
-#     new_list = [i for i in new_list if i]
-#     return new_list + [0] * (N - len(new_list))
-
-# def dfs(N, B, count):
-
-#     ret = max([max(i) for i in B])
- 
-#     if count == 0:
-#         return ret
-#     for _ in range(4):
-#         X = [convert(i, N) for i in B]
-#         if X != B:
-#             ret = max(ret, dfs(N, X, count - 1))
-        
-#         B = rotate90(B, N)
-
-# N = int(input())
-# Board = [list(map(int, input().split())) for i in range(N)]
-# print(dfs(N, Board, 5))
+ans = 0
+dfs(graph, 0)
+print(ans)
