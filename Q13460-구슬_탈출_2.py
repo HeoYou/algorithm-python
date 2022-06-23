@@ -8,7 +8,7 @@ input = sys.stdin.readline
 dx, dy = [0, 1, 0, -1], [1, 0, -1, 0]
 
 N, M = map(int, input().split())
-board = [list(input()) for i in range(N)]
+board = [list(input().strip()) for i in range(N)]
 visited = [[[[False] * M for _ in range(N)] for _ in range(M)] for _ in range(N)]
 q = deque()
 rx, ry, bx, by =  0, 0, 0, 0
@@ -51,9 +51,9 @@ def bfs():
 
                 if nrx == nbx and nry == nby:
                     if r_count > b_count:
-                        nrx, nry = nrx-dx, nry-dy
+                        nrx, nry = nrx - dx[i], nry - dy[i]
                     else:
-                        nbx, nby = nbx-dx, nby-dy
+                        nbx, nby = nbx - dx[i], nby - dy[i] 
 
                 if (nrx,nry,nbx,nby) in visited:
                     continue
